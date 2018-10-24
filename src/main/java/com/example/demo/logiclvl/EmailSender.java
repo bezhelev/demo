@@ -62,8 +62,7 @@ public class EmailSender {
     }
 
     private void sendEmailMethod(String toWhom, String messageSubject, String messageText){
-        final String username = "bezhelev98@gmail.com";
-        final String password = "lesha1998";
+
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -72,7 +71,7 @@ public class EmailSender {
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
+                        return new PasswordAuthentication("asd", "asdasd");
                     }
                 });
         try {
