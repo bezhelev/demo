@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <script type="text/javascript" src="/contact/js"></script>
+    <script type="text/javascript" src="/contact/editContactJS"></script>
+    <script type="text/javascript" src="/phonecontact/getJs"></script>
+    <script type="text/javascript" src="/attached/getJs"></script>
+    <script type="text/javascript" src="/base64js.min.js"></script>
+    <link href="/css/general.css" rel="stylesheet">
+    <link href="/css/popup.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Edit contact</title>
+</head>
+<body onload="onloadFunc()">
+
+    <div class="stickyButtonDiv">
+        <input type="submit"  onclick="window.location.href='/contact/'" value="Contact list">
+        <input type="submit" onclick="readInfo()" value="Save info">
+        <input type="submit"  onclick="clearInfo()" value="Clear info">
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td width="50%" id="avatarImage" onclick="openAvatarDialogWindow()">
+                </td>
+                <td width="50%">
+                    <input type="file" id="avatarImageFile" hidden="true" onchange='openAvatar(event)'  accept="image/*" >
+                    <div id="formForRead">
+
+                        <input type="hidden" class="text" id="idContact" value="0">
+                        <label>First name </label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupfirstName">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="firstName"   >
+                        <label>Second name </label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupsecondName">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="secondName" >
+                        <label>Third name </label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupthirdName">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="thirdName" >
+                        <label onclick="createYears()">Birthday </label>
+                        <div id="birthdayDiv">
+                        </div>
+                        <label>Sex </label>
+                        <select id="sex" class="selectInTableContact">
+                            <option value="1">Female</option>
+                            <option value="2">Male</option>
+                        </select>
+                        <p></p>
+                        <label>Citizenchip</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupcitizenchip">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="citizenchip">
+                        <label>Marital status</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupmaritalStatus">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="maritalStatus">
+                        <label>Web site</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupwebSite">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="webSite">
+                        <label>Email</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupemail">Only latin letters, numerals and characters @ and (.)</span>
+                        </div>
+                        <input type="text" class="text" id="email" >
+                        <label>Current job</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupcurrentJob">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="currentJob">
+                        <label>Country</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupcountry">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="country">
+                        <label>City</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupcity">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="city">
+                        <label>Street</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupstreet">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="street">
+                        <label>House</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopuphouse">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="house">
+                        <label>Flat</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopupflat">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="flat" onkeypress="return isNumberKey(event);">
+                        <label>Post office index</label>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopuppostOfficeIndex">Only latin letters, cyrillic and numerals</span>
+                        </div>
+                        <input type="text" class="text" id="postOfficeIndex" onkeypress="return isNumberKey(event);">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="phoneContact">
+        <div id="buttonDiv">
+            <LABEL>Phone contact</LABEL>
+            <input type="submit" class="withAlign"   onclick="createPhone()" value="Create">
+            <input type="submit" class="withAlign"  onclick="deletePhone()" value="Delete">
+        </div>
+        <div id="form">
+
+        </div>
+        <div id="myModal" class="modal">
+            <div id="addDiv" class="modal-content">
+                <input type="hidden" class="textPhone" id="id" value="0">
+                <label>countryCode</label>
+                <div class="popup">
+                    <span class="popuptext" id="myPopupcountryCode">Only numerals </span>
+                </div>
+                <input type="text" onkeypress="return isNumberKey(event);" class="textPhone" id="countryCode">
+                <p></p>
+                <label>operatorCode</label>
+                <div class="popup">
+                    <span class="popuptext" id="myPopupoperatorCode">Only numerals </span>
+                </div>
+                <input type="text" onkeypress="return isNumberKey(event);" class="textPhone" id="operatorCode">
+                <p></p>
+                <label>phoneNumber</label>
+                <div class="popup">
+                    <span class="popuptext" id="myPopupphoneNumber">Only numerals</span>
+                </div>
+                <input type="text" onkeypress="return isNumberKey(event);" class="textPhone" id="phoneNumber">
+                <p></p>
+                <label>phoneType</label>
+                <select class="textPhone" id="phoneType">
+                    <option value="1">home</option>
+                    <option value="2">mobile</option>
+                </select>
+                <p></p>
+                <label>comments</label>
+                <input type="text" class="textPhone" id="comments">
+                <p></p>
+                <input type="hidden" class="textPhone" id="contactKey" value="0">
+                <input type="submit" onclick="addInfo()" value="add">
+                <input type="submit" onclick="cancelClear()" value="cancel">
+            </div>
+        </div>
+    </div>
+    <div id="attachedFile">
+        <div id="buttonForAttached">
+            <LABEL>Attached file</LABEL>
+            <input type="submit" class="withAlign" onclick="createAttached()" value="Create">
+            <input type="submit" class="withAlign" align="right" onclick="deleteAttached()" value="Delete">
+        </div>
+        <div id="divForAttached"></div>
+        <div id="myModal2" class="modal">
+            <div id="addFile" class="modal-content">
+                <div class="popup">
+                    <span class="popuptext" id="myPopupinputFile">Don't chose file </span>
+                </div>
+                <input type='file' onchange='openFile(event)' id="inputFile">
+                <p></p>
+                <label>Comments</label>
+                <input type="text" id="commentsForAttached">
+                <p></p>
+                <input type="submit" value="Add" onclick="addAttachedRecord()">
+                <input type="submit" value="Cancel" onclick="showAttachedForWork()">
+            </div>
+        </div>
+        <div id="myModal3" class="modal">
+            <div id="updateFile" class="modal-content">
+                <label>Name</label>
+                <div class="popup">
+                    <span class="popuptext" id="myPopupfileName">Only latin letters, cyrillic and numerals</span>
+                </div>
+                <input type="text" id="fileName">
+                <p></p>
+                <label>Comments</label>
+                <input type="text" id="updateCommentsForAttached">
+                <p></p>
+                <input type="submit" value="Update" onclick="updateAttachedRecord()">
+                <input type="submit" value="Cancel" onclick="showAttachedForWork()">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

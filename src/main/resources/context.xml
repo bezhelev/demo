@@ -1,0 +1,14 @@
+<context>
+<Resource   name="jdbc/contacts"
+            factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+            auth="Container"
+            type="javax.sql.DataSource"
+            username="root"
+            password="local"
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://localhost:3306/bezhelev"
+            maxTotal="10"
+            maxIdle="10"
+            maxWaitMillis="10000"
+            defaultAutoCommit="true" />
+</context>

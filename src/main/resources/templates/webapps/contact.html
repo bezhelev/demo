@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="/contact/js"></script>
+    <script type="text/javascript" src="/contact/getJs"></script>
+    <link href="../css/general.css" rel="stylesheet">
+    <link href="/css/popup.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Contact</title>
+</head>
+<body onload="getNumberPage()">
+
+    <div class="stickyButtonDiv">
+        <input type="submit" value="Create" onclick="redirect('AAA')" name="create" >
+        <input type="submit" value="Delete" onclick="deleteChosen('/contact/')" name="delete" >
+        <select id="countRecordSelect" name="countRecord" onclick="getCountRecord()">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="10">10</option>
+        </select>
+        <input type="submit" id="showFilteredButton" value="filtered" onclick="showFiltered()" >
+
+        <input type="submit" value="Send email" onclick="showEmail()" >
+    </div>
+    <div id="myModal" class="modal" >
+        <div class="modal-content">
+            <label >
+                To whom send
+            </label>
+            <input type="text" id="toWhomSend">
+            <label >
+                Message subject
+            </label>
+            <table width="100%">
+                <tr width="100%">
+                    <td width="75%">
+                        <input type="text" id="messageSubject" class="myTextOut">
+                    </td>
+                    <td width="25%">
+                        <select id="selectInTable" class="selectInTable" onclick="setPatternToText()" value="">
+                            <option>
+                                New Year
+                            </option>
+                            <option>
+                                Hello
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <label>
+                Text message
+            </label>
+            <textarea id="messageText" rows="4" class="myTextOut">
+
+            </textarea>
+            <input type="submit" value="Send email" onclick="sendEmail()" >
+            <input type="submit" value="Cancel" onclick="cancelSend()" >
+        </div>
+
+    </div>
+    <div id="filteredDiv" hidden="true">
+        <label>First name </label>
+        <input type="text" class="text" id="firstName">
+        <label>Second name </label>
+        <input type="text" class="text" id="secondName">
+        <label>Third name </label>
+        <input type="text" class="text" id="thirdName">
+        <label>from date</label>
+        <input type="date" class="text" id="birthday">
+        <label>till date</label>
+        <input type="date" id="tillData">
+        <label>Sex </label>
+        <select id="sex">
+            <option value="0">none</option>
+            <option value="1">Female</option>
+            <option value="2">Male</option>
+        </select>
+        <p></p>
+        <label>Marital status</label>
+        <input type="text" class="text" id="maritalStatus">
+        <label>Citizenchip</label>
+        <input type="text" class="text" id="citizenchip">
+        <label>Country</label>
+        <input type="text" class="text" id="country">
+        <label>City</label>
+        <input type="text" class="text" id="city">
+        <label>Street</label>
+        <input type="text" class="text" id="street">
+        <label>House</label>
+        <input type="text" class="text" id="house">
+        <label>Flat</label>
+        <input type="text" class="text" id="flat">
+        <label>Post office index</label>
+        <input type="text" class="text" id="postOfficeIndex">
+        <input type="submit" value="find" onclick="getFiltered()">
+        <input type="submit" value="clear filter" onclick="clearFiltered()">
+
+    </div>
+    <div id="form">
+
+    </div>
+    <div id="idForPageNumberButton">
+        <!--<input type="submit" value="prev" onclick="prev()" name="prev" >-->
+        <!--<input type="submit" value="next" onclick="next()" name="next" >-->
+        <input type="submit" id="hideFilteredButton" value="cancel" onclick="cancelFiltered()" hidden="true">
+    </div>
+
+
+</body>
+<footer>
+
+</footer>
+</html>
