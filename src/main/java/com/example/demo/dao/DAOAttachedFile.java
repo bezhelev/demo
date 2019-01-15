@@ -14,12 +14,12 @@ public class DAOAttachedFile implements DAOInterface<AttachedFile> {
     final static Logger logger = Logger.getLogger(DAOPhoneContact.class);
 
     @Override
-    public List<AttachedFile> getElementsByForeignKey(int id){
+    public List<AttachedFile> getElementsByForeignKey(int id) {
         logger.info("dao attached get all files ");
         List<AttachedFile> attachedFileList = new ArrayList<>();
         AttachedFile attachedFile = new AttachedFile();
         PreparedStatement statement = null;
-        try ( Connection connection = DSConnestion.getConnection()) {
+        try (Connection connection = DSConnestion.getConnection()) {
             statement = connection.prepareStatement("select * from attached_file where contact_key = ?");
             statement.setInt(1, id);
             ResultSet resSet = statement.executeQuery();
@@ -35,16 +35,16 @@ public class DAOAttachedFile implements DAOInterface<AttachedFile> {
             }
             resSet.close();
         } catch (SQLException e) {
-            logger.error("dao attached get all files \n" +e);
-        } catch (ClassNotFoundException e ){
-            logger.error("dao attached get all files \n" +e);
-        }finally {
+            logger.error("dao attached get all files \n" + e);
+        } catch (ClassNotFoundException e) {
+            logger.error("dao attached get all files \n" + e);
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
                 }
             } catch (SQLException e) {
-                logger.error("dao attached get all files \n" +e);
+                logger.error("dao attached get all files \n" + e);
             }
         }
         return attachedFileList;
@@ -52,10 +52,10 @@ public class DAOAttachedFile implements DAOInterface<AttachedFile> {
 
     @Override
     public AttachedFile getEntityById(int id) {
-        logger.info("dao attached getEntityById id " + id );
+        logger.info("dao attached getEntityById id " + id);
         PreparedStatement statement = null;
-        AttachedFile attachedFile =  new AttachedFile();
-        try ( Connection connection = DSConnestion.getConnection()) {
+        AttachedFile attachedFile = new AttachedFile();
+        try (Connection connection = DSConnestion.getConnection()) {
             statement = connection.prepareStatement("select * from attached_file where id = ?");
             statement.setInt(1, id);
             ResultSet resSet = statement.executeQuery();
@@ -69,29 +69,29 @@ public class DAOAttachedFile implements DAOInterface<AttachedFile> {
             }
             resSet.close();
         } catch (SQLException e) {
-            logger.error("dao attached getEntityById id " +id+"\n" +e);
-        } catch (ClassNotFoundException e ){
-            logger.error("dao attached getEntityById id " +id+"\n" +e);
-        }finally {
+            logger.error("dao attached getEntityById id " + id + "\n" + e);
+        } catch (ClassNotFoundException e) {
+            logger.error("dao attached getEntityById id " + id + "\n" + e);
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
                 }
 
             } catch (SQLException e) {
-                logger.error("dao attached getEntityById id " +id+"\n" +e);
+                logger.error("dao attached getEntityById id " + id + "\n" + e);
             }
         }
         return attachedFile;
     }
 
     @Override
-    public List<AttachedFile> getAll(int numberRecord,int countRecordOnPage) {
+    public List<AttachedFile> getAll(int numberRecord, int countRecordOnPage) {
         logger.info("dao attached get all number " + numberRecord + " count " + countRecordOnPage);
         List<AttachedFile> attachedFileList = new ArrayList<>();
         Statement statement = null;
         AttachedFile attachedFile = new AttachedFile();
-        try ( Connection connection = DSConnestion.getConnection()) {
+        try (Connection connection = DSConnestion.getConnection()) {
             statement = connection.createStatement();
             ResultSet resSet = statement.executeQuery("select * from attached_file");
             while (resSet.next()) {
@@ -105,16 +105,16 @@ public class DAOAttachedFile implements DAOInterface<AttachedFile> {
             }
             resSet.close();
         } catch (SQLException e) {
-            logger.error("dao attached get all number " +numberRecord +" count "+countRecordOnPage +"\n" +e);
-        } catch (ClassNotFoundException e ){
-            logger.error("dao attached get all number " +numberRecord +" count "+countRecordOnPage +"\n" +e);
-        }finally {
+            logger.error("dao attached get all number " + numberRecord + " count " + countRecordOnPage + "\n" + e);
+        } catch (ClassNotFoundException e) {
+            logger.error("dao attached get all number " + numberRecord + " count " + countRecordOnPage + "\n" + e);
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
                 }
             } catch (SQLException e) {
-                logger.error("dao attached get all number " +numberRecord +" count "+countRecordOnPage +"\n" +e);
+                logger.error("dao attached get all number " + numberRecord + " count " + countRecordOnPage + "\n" + e);
             }
         }
         return attachedFileList;
@@ -124,27 +124,27 @@ public class DAOAttachedFile implements DAOInterface<AttachedFile> {
     public void addEntity(AttachedFile entity) {
         logger.info("dao attached add contacts : " + entity.toString());
         PreparedStatement statement = null;
-        try ( Connection connection = DSConnestion.getConnection()) {
+        try (Connection connection = DSConnestion.getConnection()) {
             statement = connection.prepareStatement("insert into attached_file (file_name,upload_date,comments," +
-                    "path_to_file, contact_key) values (?,?,?,?,?)" );
-            addOrUpdate(statement,entity);
+                    "path_to_file, contact_key) values (?,?,?,?,?)");
+            addOrUpdate(statement, entity);
             statement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("dao attached addEntity contact : " +entity.toString()+"\n" +e);
-        } catch (ClassNotFoundException e ){
-            logger.error("dao attached addEntity contact : " +entity.toString()+"\n" +e);
-        }finally {
+            logger.error("dao attached addEntity contact : " + entity.toString() + "\n" + e);
+        } catch (ClassNotFoundException e) {
+            logger.error("dao attached addEntity contact : " + entity.toString() + "\n" + e);
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
                 }
             } catch (SQLException e) {
-                logger.error("dao attached addEntity contact : " +entity.toString()+"\n" +e);
+                logger.error("dao attached addEntity contact : " + entity.toString() + "\n" + e);
             }
         }
     }
 
-    void addOrUpdate( PreparedStatement statement,AttachedFile entity )throws SQLException{
+    void addOrUpdate(PreparedStatement statement, AttachedFile entity) throws SQLException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         statement.setString(1, entity.getFileName());
         statement.setString(2, dateFormat.format(entity.getUploadDate()));
@@ -158,47 +158,47 @@ public class DAOAttachedFile implements DAOInterface<AttachedFile> {
         logger.info("dao attached update contacts : " + entity.toString());
         PreparedStatement statement = null;
 
-        try ( Connection connection = DSConnestion.getConnection()) {
+        try (Connection connection = DSConnestion.getConnection()) {
             statement = connection
                     .prepareStatement("UPDATE attached_file SET file_name= ?,"
                             + " upload_date = ?, comments= ?, path_to_file= ?, contact_key= ? WHERE id = ?");
-            addOrUpdate(statement,entity);
+            addOrUpdate(statement, entity);
             statement.setInt(6, entity.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("dao attached updateEntity contact : " +entity.toString()+"\n" +e);
-        } catch (ClassNotFoundException e ){
-            logger.error("dao attached updateEntity contact : " +entity.toString()+"\n" +e);
-        }finally {
+            logger.error("dao attached updateEntity contact : " + entity.toString() + "\n" + e);
+        } catch (ClassNotFoundException e) {
+            logger.error("dao attached updateEntity contact : " + entity.toString() + "\n" + e);
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
                 }
             } catch (SQLException e) {
-                logger.error("dao attached updateEntity contact : " +entity.toString()+"\n" +e);
+                logger.error("dao attached updateEntity contact : " + entity.toString() + "\n" + e);
             }
         }
     }
 
     @Override
-    public void deleteEntity(int id,int contactKey) {
-        logger.info("dao attached deleteEntity id " + id );
+    public void deleteEntity(int id, int contactKey) {
+        logger.info("dao attached deleteEntity id " + id);
         PreparedStatement statement = null;
-        try ( Connection connection = DSConnestion.getConnection()) {
+        try (Connection connection = DSConnestion.getConnection()) {
             statement = connection.prepareStatement("DELETE from attached_file WHERE id = ?");
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("dao attached delete id : " +id+"\n" +e);
-        } catch (ClassNotFoundException e ){
-            logger.error("dao attached delete id : " +id+"\n" +e);
-        }finally {
+            logger.error("dao attached delete id : " + id + "\n" + e);
+        } catch (ClassNotFoundException e) {
+            logger.error("dao attached delete id : " + id + "\n" + e);
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
                 }
             } catch (SQLException e) {
-                logger.error("dao attached delete id : " +id+"\n" +e);
+                logger.error("dao attached delete id : " + id + "\n" + e);
             }
         }
     }

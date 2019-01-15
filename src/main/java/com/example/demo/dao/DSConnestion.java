@@ -22,7 +22,7 @@ public class DSConnestion {
     }
 
     private static Connection connection() throws SQLException {
-        Connection conn =  DriverManager.getConnection(url, user, pass);
+        Connection conn = DriverManager.getConnection(url, user, pass);
         return conn;
     }
 
